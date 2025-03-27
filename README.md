@@ -170,7 +170,7 @@ print(chem_name)
 ```
 
 prints
-> \>\> Atrazine
+> Atrazine
 
 #### ChemFUTHelper.get_class_id_from_name()
 
@@ -184,7 +184,7 @@ print(class_id)
 ```
 
 prints
-> \>\> func_0231
+> func_0231
 
 #### ChemFUTHelper.get_class_name_from_id()
 
@@ -198,7 +198,7 @@ print(class_name)
 ```
 
 prints
-> \>\> Pharmaceuticals
+> Pharmaceuticals
 
 #### ChemFUTHelper.get_chem_classes()
 
@@ -216,7 +216,7 @@ print(atrazine_classes)
 ```
 
 prints
-> \>\> Additives; Biocides; Biologicals; Fertilizers; Herbicides; Hormones; Industrial Chemicals; Pesticides; Soil Additives; Xenohormones
+> Additives; Biocides; Biologicals; Fertilizers; Herbicides; Hormones; Industrial Chemicals; Pesticides; Soil Additives; Xenohormones
 
 To only get the classes for Atrazine that came from APPRIL in a list:
 
@@ -228,7 +228,7 @@ print(atrazine_classes)
 ```
 
 prints
-> \>\> ['Additives', 'Biocides', 'Fertilizers', 'Herbicides', 'Industrial Chemicals', 'Pesticides', 'Soil Additives']
+> ['Additives', 'Biocides', 'Fertilizers', 'Herbicides', 'Industrial Chemicals', 'Pesticides', 'Soil Additives']
 
 To return the classification IDs instead of the class names:
 
@@ -240,7 +240,7 @@ print(atrazine_classes)
 ```
 
 prints
-> \>\> ['func_0005', 'func_0087', 'func_0153', 'func_0181', 'func_0189', 'func_0227', 'func_0269']
+> ['func_0005', 'func_0087', 'func_0153', 'func_0181', 'func_0189', 'func_0227', 'func_0269']
 
 #### ChemFUTHelper.get_class_parents
 
@@ -254,7 +254,7 @@ print(parents)
 ```
 
 prints
-> \>\> ['Anthelmintics', 'Nematicides']
+> ['Anthelmintics', 'Nematicides']
 
 #### ChemFUTHelper.get_class_children()
 
@@ -268,4 +268,4 @@ print(children)
 ```
 
 prints
-> \>\> ['Acaricides', 'Algicides', 'Antifouling Agents', 'Antimicrobial Agents', 'Antimycotics', 'Antiparasitics', 'Avicides', 'Chemosterilants', 'Fumigants', 'Fungicides', 'Fungistats', 'Herbicides', 'Insecticides', 'Molluscicides', 'Nematicides', 'Spermicides', 'Sporicide', 'Sterilizing Agents']
+> ['Acaricides', 'Algicides', 'Antifouling Agents', 'Antimicrobial Agents', 'Antimycotics', 'Antiparasitics', 'Avicides', 'Chemosterilants', 'Fumigants', 'Fungicides', 'Fungistats', 'Herbicides', 'Insecticides', 'Molluscicides', 'Nematicides', 'Spermicides', 'Sporicide', 'Sterilizing Agents']
