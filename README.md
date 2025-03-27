@@ -269,3 +269,12 @@ print(children)
 
 prints
 > ['Acaricides', 'Algicides', 'Antifouling Agents', 'Antimicrobial Agents', 'Antimycotics', 'Antiparasitics', 'Avicides', 'Chemosterilants', 'Fumigants', 'Fungicides', 'Fungistats', 'Herbicides', 'Insecticides', 'Molluscicides', 'Nematicides', 'Spermicides', 'Sporicide', 'Sterilizing Agents']
+
+#### ChemFUTHelper.export_db_to_excel()
+
+This method generates a data dump of `ChemFUT.db` in the form of a `.xlsx` file. This requires the openpyxl library.
+
+```python
+FuncDB = ChemFUTHelper()
+FuncDB.export_db_to_excel("./path/to/ChemFUT_datadump.xlsx")
+```

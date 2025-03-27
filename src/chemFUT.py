@@ -346,7 +346,77 @@ class ChemFUTHelper(SqliteHandler):
         parents.sort()
         
         return parents
-            
-if __name__ == "__main__":
-    pass
     
+    def export_db_to_excel(self, output_path: str | Path) -> None:
+        """Exports the entire database to an Excel file with one worksheet per table.
+
+        Parameters
+        ----------
+        output_path : str | pathlib.Path
+            The path to save the resulting .xlsx file.
+        """
+        try:
+            from openpyxl import Workbook
+            from openpyxl.styles import Alignment, Font
+        except ImportError:
+            raise ImportError(
+                "The 'openpyxl' library is required for this method. "
+                "Please install it using 'pip install openpyxl'."
+            )
+        
+        if not self.conn:
+            raise ValueError("No active database connection. Please set a connection first.")
+
+        ## Create a new Excel workbook
+        workbook = Workbook()
+        default_sheet = workbook.active
+        workbook.remove(default_sheet)  # Remove the default sheet
+
+        ## setup alignment and font objects for header formatting
+        bold_font = Font(bold=True)
+        center_alignment = Alignment(horizontal="center", vertical="center") 
+
+        ## Get all table names in the database
+        self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+        tables = self.cursor.fetchall()
+
+        for table in tables:
+            table_name = table[0]
+
+            ## Create a new worksheet for each table
+            worksheet = workbook.create_sheet(title=table_name)
+
+            ## Fetch all rows and column names from the table
+            self.cursor.execute(f"SELECT * FROM {table_name};")
+            rows = self.cursor.fetchall()
+            column_names = [description[0] for description in self.cursor.description]
+
+            ## Write column headers to the worksheet
+            worksheet.append(column_names)
+            
+            ## Apply formatting to headers
+            for column_i, column_name in enumerate(column_names, start=1):
+                cell = worksheet.cell(row=1, column=column_i)
+                cell.alignment = center_alignment
+                cell.font = bold_font
+
+            ## Write rows to the worksheet
+            for row in rows:
+                worksheet.append(row)
+                
+            ## Adjust column widths
+            for column_i, column_name in enumerate(column_names, start=1):
+                max_length = len(column_name)  # Start with the header length
+                for row in rows:
+                    try:
+                        max_length = max(max_length, len(str(row[column_i - 1])))
+                    except IndexError:
+                        pass
+                adjusted_width = max_length + 2  # Add some padding
+                worksheet.column_dimensions[chr(64 + column_i)].width = min(adjusted_width, 110)
+
+        ## Save the workbook to the specified output path
+        workbook.save(output_path)
+
+if __name__ == "__main__":
+    pass    
