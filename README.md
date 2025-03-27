@@ -169,7 +169,6 @@ chem_name = FuncDB.get_chem_name(dtxsid)
 print(chem_name)
 ```
 
-prints
 > Atrazine
 
 #### ChemFUTHelper.get_class_id_from_name()
@@ -183,7 +182,6 @@ class_id = FuncDB.get_class_id_from_name(class_name)
 print(class_id)
 ```
 
-prints
 > func_0231
 
 #### ChemFUTHelper.get_class_name_from_id()
@@ -197,7 +195,6 @@ class_name = FuncDB.get_class_id_from_name(class_id)
 print(class_name)
 ```
 
-prints
 > Pharmaceuticals
 
 #### ChemFUTHelper.get_chem_classes()
@@ -215,7 +212,6 @@ atrazine_classes = FuncDB.get_chem_classes(dtxsid)
 print(atrazine_classes)
 ```
 
-prints
 > Additives; Biocides; Biologicals; Fertilizers; Herbicides; Hormones; Industrial Chemicals; Pesticides; Soil Additives; Xenohormones
 
 To only get the classes for Atrazine that came from APPRIL in a list:
@@ -227,7 +223,6 @@ atrazine_classes = FuncDB.get_chem_classes(dtxsid, sources=["appril"], as_str=Fa
 print(atrazine_classes)
 ```
 
-prints
 > ['Additives', 'Biocides', 'Fertilizers', 'Herbicides', 'Industrial Chemicals', 'Pesticides', 'Soil Additives']
 
 To return the classification IDs instead of the class names:
@@ -239,7 +234,6 @@ atrazine_classes = FuncDB.get_chem_classes(dtxsid, names=False, sources=["appril
 print(atrazine_classes)
 ```
 
-prints
 > ['func_0005', 'func_0087', 'func_0153', 'func_0181', 'func_0189', 'func_0227', 'func_0269']
 
 #### ChemFUTHelper.get_class_parents
@@ -253,7 +247,6 @@ parents = FuncDB.get_class_parents(class_name)
 print(parents)
 ```
 
-prints
 > ['Anthelmintics', 'Nematicides']
 
 #### ChemFUTHelper.get_class_children()
@@ -267,7 +260,6 @@ children = FuncDB.get_class_parents(class_name)
 print(children)
 ```
 
-prints
 > ['Acaricides', 'Algicides', 'Antifouling Agents', 'Antimicrobial Agents', 'Antimycotics', 'Antiparasitics', 'Avicides', 'Chemosterilants', 'Fumigants', 'Fungicides', 'Fungistats', 'Herbicides', 'Insecticides', 'Molluscicides', 'Nematicides', 'Spermicides', 'Sporicide', 'Sterilizing Agents']
 
 #### ChemFUTHelper.export_db_to_excel()
