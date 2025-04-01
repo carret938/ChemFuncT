@@ -1,12 +1,12 @@
-# Chemical Functional Use Taxonomy (ChemFUT)
+# Chemical Function Taxonomy (ChemFuncT)
 
-The Analytical Methods and Open Spectra (AMOS) Database's Chemical Functional Use Taxonomy (ChemFUT) contains mappings between chemicals (via name and DTXSID) and their functional uses. This repository contains a snapshot of the SQLite database and a Python class to help query the database.
+The Analytical Methods and Open Spectra (AMOS) Database's Chemical Function Taxonomy (ChemFuncT) contains mappings between chemicals (via name and DTXSID) and their functional uses. This repository contains a snapshot of the SQLite database and a Python class to help query the database.
 
-## ChemFUT Database
+## ChemFuncT Database
 
-A snapshot of the data is contained in `data/ChemFUT.db`. Here is an ER diagram representation of the database.
+A snapshot of the data is contained in `data/ChemFuncT.db`. Here is an ER diagram representation of the database.
 
-![ChemFUT ER Diagram](./resources/ER_diagram.png)
+![ChemFuncT ER Diagram](./resources/ER_diagram.png)
 
 Descriptions of each table and their variables follow:
 
@@ -16,7 +16,7 @@ Descriptions of each table and their variables follow:
 | Chemicals | Maps the unique chemical identifier (DTXSID) to its chemical name. |
 | Classifications | Maps a unique classification ID to a human readable class name (e.g., Pharmaceuticals) and a description of that class. |
 | ChemicalClassifications | Maps chemicals (by DTXSID) to their classifications, and which source that classification came from. |
-| SourceMappings | Contains the raw category pulled from a given source mapped to a harmonized ChemFUT class. |
+| SourceMappings | Contains the raw category pulled from a given source mapped to a harmonized ChemFuncT class. |
 | ClassificationHierarchy | Contains parent/child mappings for each classification. |
 
 ### Sources Table
@@ -65,36 +65,36 @@ Descriptions of each table and their variables follow:
 
 ## Usage
 
-For the chemFUT.ChemFUTHelper class to work by default, you must use the following directory structure:
+For the ChemFuncT.ChemFuncTHelper class to work by default, you must use the following directory structure:
 
 ![Expected directory structure](./resources/directory_tree.png)
 
 For more information about any given method and its parameters, check the respective docstring in the source code.
 
-### Connecting to ChemFUT.db
+### Connecting to ChemFuncT.db
 
-If using the recommended directory structure, the path to ChemFUT.db is correctly set within the `sqlite_handler.SqliteHandler.chem_func_uses_path` attribute such that instantiating an instance of `chemFUT.ChemFUTHelper` will automatically connect to the database and set the resulting `sqlite3.Connection` and `sqlite3.Cursor` objects to the `chemFUT.ChemFUTHelper.conn` and `chemFUT.ChemFUTHelper.cursor` attributes, respectively.
+If using the recommended directory structure, the path to ChemFuncT.db is correctly set within the `sqlite_handler.SqliteHandler.chem_func_uses_path` attribute such that instantiating an instance of `ChemFuncT.ChemFuncTHelper` will automatically connect to the database and set the resulting `sqlite3.Connection` and `sqlite3.Cursor` objects to the `ChemFuncT.ChemFuncTHelper.conn` and `ChemFuncT.ChemFuncTHelper.cursor` attributes, respectively.
 
 ```python
-from chemFUT import ChemFUTHelper
+from ChemFuncT import ChemFuncTHelper
 
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 ```
 
-If using a different directory structure, you can specify the path of your `.db` file when instantiating `chemFUT.ChemFUTHelper` as a string or a `pathlib.Path` object.
+If using a different directory structure, you can specify the path of your `.db` file when instantiating `ChemFuncT.ChemFuncTHelper` as a string or a `pathlib.Path` object.
 
 ```python
-FuncDB = ChemFUTHelper("./path/to/ChemFUT.db")
+FuncDB = ChemFuncTHelper("./path/to/ChemFuncT.db")
 ```
 
 ### Print Database/Table Descriptions
 
-#### ChemFUTHelper.print_db_description()
+#### ChemFuncTHelper.print_db_description()
 
 This method will print a description of each table with its columns to the console.
 
 ```python
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 FuncDB.print_db_description()
 ```
 
@@ -129,41 +129,41 @@ Table: Sources
 ----------------------------------------
 ```
 
-#### ChemFUTHelper.print_table()
+#### ChemFuncTHelper.print_table()
 
 This method will print the contents of a table from the database. The user specifies the number of rows they want printed. To print the first 10 rows of the `SourceMappings` table:
 
 ```python
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 FuncDB.print_table(table_name="SourceMappings", limit=10)
 ```
 
 To print every row of the `Sources` table:
 
 ```python
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 FuncDB.print_table(table_name="Sources", limit=None)
 ```
 
 ### Making Queries
 
-#### ChemFUTHelper.query_hierarchy_paths()
+#### ChemFuncTHelper.query_hierarchy_paths()
 
 This method will return every possible hierarchical path starting from each root node. The returned data structure is by default a tuple of two lists of strings. The first list contains the paths with the classes encoded with their classification id (e.g., func_0004), the second list contains the paths with the class names. Each element represents one possible path (e.g., ['Drugs -> Pharmaceuticals -> Respiratory Drugs -> Anti-allergic Agents', 'Drugs -> Pharmaceuticals -> Respiratory Drugs -> Anti-allergic Agents -> Antihistamines']). Notice that the delimiter ' -> ' points from parent to child.
 
 This method might be useful for further processing, things like determining the longest path from a root node to a leaf node.
 
 ```python
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 id_paths, class_name_paths = FuncDB.query_hierarchy_paths()
 ```
 
-#### ChemFUTHelper.get_chem_name()
+#### ChemFuncTHelper.get_chem_name()
 
 Takes a DTXSID as a required parameter and returns the chemical name.
 
 ```python
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 dtxsid = "DTXSID9020112"
 chem_name = FuncDB.get_chem_name(dtxsid)
 print(chem_name)
@@ -171,12 +171,12 @@ print(chem_name)
 
 > Atrazine
 
-#### ChemFUTHelper.get_class_id_from_name()
+#### ChemFuncTHelper.get_class_id_from_name()
 
 Takes a class name and returns its class id.
 
 ```python
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 class_name = "Pharmaceuticals"
 class_id = FuncDB.get_class_id_from_name(class_name)
 print(class_id)
@@ -184,12 +184,12 @@ print(class_id)
 
 > func_0231
 
-#### ChemFUTHelper.get_class_name_from_id()
+#### ChemFuncTHelper.get_class_name_from_id()
 
 Takes a class id and returns its name.
 
 ```python
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 class_id = "func_0231"
 class_name = FuncDB.get_class_id_from_name(class_id)
 print(class_name)
@@ -197,7 +197,7 @@ print(class_name)
 
 > Pharmaceuticals
 
-#### ChemFUTHelper.get_chem_classes()
+#### ChemFuncTHelper.get_chem_classes()
 
 Returns the classes that a chemical (from DTXSID) is a member of. This method is fairly robust in that it allows many alterations of your output through the optional parameters.
 
@@ -206,7 +206,7 @@ It should be noted that the hierarchy of classes is not retained in the returned
 To return all classes that Atrazine is a member of, from all sources:
 
 ```python
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 dtxsid = "DTXSID9020112"
 atrazine_classes = FuncDB.get_chem_classes(dtxsid)
 print(atrazine_classes)
@@ -217,7 +217,7 @@ print(atrazine_classes)
 To only get the classes for Atrazine that came from APPRIL in a list:
 
 ```python
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 dtxsid = "DTXSID9020112"
 atrazine_classes = FuncDB.get_chem_classes(dtxsid, sources=["appril"], as_str=False)
 print(atrazine_classes)
@@ -228,7 +228,7 @@ print(atrazine_classes)
 To return the classification IDs instead of the class names:
 
 ```python
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 dtxsid = "DTXSID9020112"
 atrazine_classes = FuncDB.get_chem_classes(dtxsid, names=False, sources=["appril"], as_str=False)
 print(atrazine_classes)
@@ -236,12 +236,12 @@ print(atrazine_classes)
 
 > ['func_0005', 'func_0087', 'func_0153', 'func_0181', 'func_0189', 'func_0227', 'func_0269']
 
-#### ChemFUTHelper.get_class_parents
+#### ChemFuncTHelper.get_class_parents
 
 Returns the direct parents of a given class (accepts either class name or class id).
 
 ```python
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 class_name = "Antinematodal Agents"
 parents = FuncDB.get_class_parents(class_name)
 print(parents)
@@ -249,12 +249,12 @@ print(parents)
 
 > ['Anthelmintics', 'Nematicides']
 
-#### ChemFUTHelper.get_class_children()
+#### ChemFuncTHelper.get_class_children()
 
 Returns the direct children of a given class (accepts either class name or class id).
 
 ```python
-FuncDB = ChemFUTHelper()
+FuncDB = ChemFuncTHelper()
 class_name = "Biocides"
 children = FuncDB.get_class_parents(class_name)
 print(children)
@@ -262,11 +262,11 @@ print(children)
 
 > ['Acaricides', 'Algicides', 'Antifouling Agents', 'Antimicrobial Agents', 'Antimycotics', 'Antiparasitics', 'Avicides', 'Chemosterilants', 'Fumigants', 'Fungicides', 'Fungistats', 'Herbicides', 'Insecticides', 'Molluscicides', 'Nematicides', 'Spermicides', 'Sporicide', 'Sterilizing Agents']
 
-#### ChemFUTHelper.export_db_to_excel()
+#### ChemFuncTHelper.export_db_to_excel()
 
-This method generates a data dump of `ChemFUT.db` in the form of a `.xlsx` file. This requires the openpyxl library.
+This method generates a data dump of `ChemFuncT.db` in the form of a `.xlsx` file. This requires the openpyxl library.
 
 ```python
-FuncDB = ChemFUTHelper()
-FuncDB.export_db_to_excel("./path/to/ChemFUT_datadump.xlsx")
+FuncDB = ChemFuncTHelper()
+FuncDB.export_db_to_excel("./path/to/ChemFuncT_datadump.xlsx")
 ```

@@ -1,4 +1,4 @@
-"""Handles tasks associated with the Chemical Functional Use Taxonomy sqlite database.
+"""Handles tasks associated with the Chemical Function Taxonomy sqlite database.
 
 E. Tyler Carr
 November 21, 2024
@@ -8,11 +8,11 @@ from typing import Literal
 
 from sqlite_handler import SqliteHandler
 
-class ChemFUTHelper(SqliteHandler):
+class ChemFuncTHelper(SqliteHandler):
     """Class representing a connection to the Functional Use Classification DB."""
     
     def __init__(self, path: str | Path | None = None):
-        """Constructor for ChemFUTHelper objects.
+        """Constructor for ChemFuncTHelper objects.
         
         Inherits from amos.src.sqlite_handler.SqliteHandler class.
         
@@ -21,7 +21,7 @@ class ChemFUTHelper(SqliteHandler):
         Parameters
         ----------
         path : str | pathlib.Path | None, default None
-            The path to the ChemFUTHelper sqlite .db file. If None, uses the parent
+            The path to the ChemFuncTHelper sqlite .db file. If None, uses the parent
             class sqlite_handler.SqliteHandler attribute.
         """
         super().__init__()
