@@ -63,6 +63,15 @@ Descriptions of each table and their variables follow:
 | child_id | CPK, FK $\rightarrow$ `Classifications.id` | The unique classification identifier for the child node. |
 | parent_id | CPK, FK $\rightarrow$ `Classifications.id` | The unique classification identifier for the parent node. |
 
+## Data Sources
+
+This dataset was compiled using information from:
+
+- Wikipedia – General-purpose encyclopedia entries on chemical uses.
+- [ChemExpo](https://comptox.epa.gov/chemexpo/) – A web application that surfaces reported chemical function use from the EPA's CPDat database.
+- [DrugBank](https://go.drugbank.com/) – Pharmaceutical chemical uses and mechanisms.
+- [APPRIL](https://ordspub.epa.gov/ords/pesticides/f?p=APPRIL_PUBLIC:2::::::) – The EPA's Active Pesticide Product Registration Informational Listing.
+
 ## Usage
 
 For the ChemFuncT.ChemFuncTHelper class to work by default, you must use the following directory structure:
