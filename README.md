@@ -2,6 +2,15 @@
 
 The Analytical Methods and Open Spectra (AMOS) Database's Chemical Function Taxonomy (ChemFuncT) contains mappings between chemicals (via name and DTXSID) and their functional uses. This repository contains a snapshot of the SQLite database and a Python class to help query the database.
 
+## Sources
+
+This dataset was compiled using information from:
+
+- Wikipedia – General-purpose encyclopedia entries on chemical uses.
+- [ChemExpo](https://comptox.epa.gov/chemexpo/) – A web application that surfaces reported chemical function use from the EPA's CPDat database.
+- [DrugBank](https://go.drugbank.com/) – Pharmaceutical chemical uses and mechanisms.
+- [APPRIL](https://ordspub.epa.gov/ords/pesticides/f?p=APPRIL_PUBLIC:2::::::) – The EPA's Active Pesticide Product Registration Informational Listing.
+
 ## ChemFuncT Database
 
 A snapshot of the data is contained in `data/ChemFuncT.db`. Here is an ER diagram representation of the database.
@@ -62,15 +71,6 @@ Descriptions of each table and their variables follow:
 |----------|------|-------------|
 | child_id | CPK, FK $\rightarrow$ `Classifications.id` | The unique classification identifier for the child node. |
 | parent_id | CPK, FK $\rightarrow$ `Classifications.id` | The unique classification identifier for the parent node. |
-
-## Data Sources
-
-This dataset was compiled using information from:
-
-- Wikipedia – General-purpose encyclopedia entries on chemical uses.
-- [ChemExpo](https://comptox.epa.gov/chemexpo/) – A web application that surfaces reported chemical function use from the EPA's CPDat database.
-- [DrugBank](https://go.drugbank.com/) – Pharmaceutical chemical uses and mechanisms.
-- [APPRIL](https://ordspub.epa.gov/ords/pesticides/f?p=APPRIL_PUBLIC:2::::::) – The EPA's Active Pesticide Product Registration Informational Listing.
 
 ## Usage
 
