@@ -270,3 +270,9 @@ This method generates a data dump of `ChemFuncT.db` in the form of a `.xlsx` fil
 FuncDB = ChemFuncTHelper()
 FuncDB.export_db_to_excel("./path/to/ChemFuncT_datadump.xlsx")
 ```
+
+## License
+
+[![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](https://creativecommons.org/publicdomain/zero/1.0/)
+This project is released under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
+
